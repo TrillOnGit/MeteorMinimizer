@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://1o6ee2176mlo"]
+
+[ext_resource type="Script" path="res://node_2d.cs" id="1_rsb4n"]
+[ext_resource type="Texture2D" uid="uid://buaf7l37r8hry" path="res://sprites/spritesheet.png" id="3_xxr55"]
+[ext_resource type="Script" path="res://objects/Player.cs" id="4_3u25v"]
+[ext_resource type="AudioStream" uid="uid://ddko71vc7h05e" path="res://audio/LaserShoot.wav" id="5_dkc63"]
+[ext_resource type="PackedScene" uid="uid://c4hkubwy3flie" path="res://objects/AsteroidBarrier.tscn" id="6_1f6mf"]
+[ext_resource type="Script" path="res://objects/AsteroidSpawner.cs" id="6_r4t0v"]
+[ext_resource type="Texture2D" uid="uid://cf4u7h6l32fhn" path="res://sprites/background.png" id="7_ryatb"]
+[ext_resource type="Script" path="res://ScoreLabel.cs" id="8_8iri8"]
+[ext_resource type="Script" path="res://Clock.cs" id="8_qno12"]
+[ext_resource type="AudioStream" uid="uid://dtkkpjlhvogkq" path="res://audio/Explosion.wav" id="10_d5jxo"]
+[ext_resource type="Script" path="res://audioPlayers/AsteroidDestroyedSfx.cs" id="10_lyobl"]
+[ext_resource type="AudioStream" uid="uid://bxuteyo0xisa3" path="res://audio/SmallExplosion.wav" id="12_u3ldr"]
+[ext_resource type="AudioStream" uid="uid://cnarq4pgg1f2h" path="res://audio/TinyExplosion.wav" id="13_2e7x0"]
+[ext_resource type="AudioStream" uid="uid://76npmw3ik372" path="res://audio/MissedMeteor.wav" id="14_qdkej"]
+[ext_resource type="Script" path="res://audioPlayers/AsteroidMissedSfx.cs" id="15_4gegv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcks6"]
+size = Vector2(12, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjveb"]
+size = Vector2(78, 18)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_rsb4n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("7_ryatb")
+centered = false
+
+[node name="Player" type="Area2D" parent="."]
+position = Vector2(82, 132)
+collision_mask = 0
+script = ExtResource("4_3u25v")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+texture_filter = 1
+texture = ExtResource("3_xxr55")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_lcks6")
+
+[node name="ShotTimer" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="LaserSoundFx" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("5_dkc63")
+volume_db = -10.0
+
+[node name="Zones" type="Node" parent="."]
+
+[node name="AsteroidSpawner" type="Area2D" parent="Zones"]
+position = Vector2(80, -17)
+script = ExtResource("6_r4t0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/AsteroidSpawner"]
+position = Vector2(0, -2)
+scale = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_pjveb")
+debug_color = Color(0.466667, 0.592157, 0.0745098, 0.419608)
+
+[node name="SpawnTimer" type="Timer" parent="Zones/AsteroidSpawner"]
+one_shot = true
+
+[node name="AsteroidBarrier" parent="Zones" instance=ExtResource("6_1f6mf")]
+
+[node name="AsteroidBarrier2" parent="Zones" instance=ExtResource("6_1f6mf")]
+position = Vector2(78, -403)
+rotation = 1.57079
+Direct = 0
+
+[node name="AsteroidBarrier3" parent="Zones" instance=ExtResource("6_1f6mf")]
+position = Vector2(-10, -121)
+
+[node name="UiControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 161.0
+offset_bottom = 145.0
+
+[node name="ScoreLabel" type="Label" parent="UiControl"]
+layout_mode = 0
+offset_right = 77.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.666667, 0.811765, 0.054902, 1)
+theme_override_font_sizes/font_size = 9
+script = ExtResource("8_8iri8")
+
+[node name="Clock" type="Label" parent="UiControl"]
+layout_mode = 0
+offset_left = 104.0
+offset_right = 159.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.666667, 0.811765, 0.054902, 1)
+theme_override_font_sizes/font_size = 9
+horizontal_alignment = 2
+script = ExtResource("8_qno12")
+
+[node name="AsteroidDestroyedSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_d5jxo")
+volume_db = -15.0
+script = ExtResource("10_lyobl")
+
+[node name="AsteroidDestroyedSfx2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_2e7x0")
+volume_db = -10.0
+script = ExtResource("10_lyobl")
+Divisions = 1
+
+[node name="AsteroidDestroyedSfx3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_u3ldr")
+volume_db = -10.0
+script = ExtResource("10_lyobl")
+Divisions = 2
+
+[node name="AsteroidMissedSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_qdkej")
+volume_db = -18.0
+script = ExtResource("15_4gegv")

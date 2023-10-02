@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://8u6yao3rq6x7"]
+
+[ext_resource type="PackedScene" uid="uid://dxvvjjrkggdyg" path="res://objects/Asteroid1.tscn" id="1_r31s4"]
+
+[node name="Asteroid2" instance=ExtResource("1_r31s4")]
+position = Vector2(53, 52)
+Hp = 1
+MaxVelocityY = 20
+Acceleration = 10
+
+[node name="Sprite2D" parent="." index="0"]
+hframes = 1
+region_rect = Rect2(0, 64, 8, 8)
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+position = Vector2(-1, -2)
+scale = Vector2(0.189389, 0.179278)
+polygon = PackedVector2Array(-15.8404, 22.3117, 0, 27.8896, 18.8396, 20.2276, 21.531, 2.88963, 21.1206, -11.1559, -5.28012, -11.1559)

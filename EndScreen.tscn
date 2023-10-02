@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqtoil0fx33f0"]
+
+[ext_resource type="Texture2D" uid="uid://cf4u7h6l32fhn" path="res://sprites/background.png" id="1_jmgdp"]
+[ext_resource type="Script" path="res://VictoryText.cs" id="2_0l5je"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(80, 72)
+texture = ExtResource("1_jmgdp")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -54.0
+offset_right = 70.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.666667, 0.811765, 0.054902, 1)
+horizontal_alignment = 1
+autowrap_mode = 2
+script = ExtResource("2_0l5je")

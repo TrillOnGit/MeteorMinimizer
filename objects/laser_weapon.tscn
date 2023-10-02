@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7ps0cidht3ew"]
+
+[ext_resource type="Script" path="res://objects/LaserSpawn.cs" id="1_rnm47"]
+[ext_resource type="Texture2D" uid="uid://ch82s1cia2hc6" path="res://sprites/BulletPlaceHold.png" id="2_8h1s1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4embp"]
+size = Vector2(4, 4.375)
+
+[node name="LaserSpawn" type="Node2D"]
+script = ExtResource("1_rnm47")
+
+[node name="Laser" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Laser"]
+texture_filter = 1
+position = Vector2(0, 1)
+texture = ExtResource("2_8h1s1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser"]
+position = Vector2(0, -0.1875)
+shape = SubResource("RectangleShape2D_4embp")

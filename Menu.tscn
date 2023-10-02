@@ -1,0 +1,128 @@
+[gd_scene load_steps=13 format=3 uid="uid://btgxloltlvimc"]
+
+[ext_resource type="Script" path="res://Menu.cs" id="1_em00u"]
+[ext_resource type="Texture2D" uid="uid://cf4u7h6l32fhn" path="res://sprites/background.png" id="2_xvp8g"]
+[ext_resource type="Script" path="res://StartButton.cs" id="3_kdx4g"]
+[ext_resource type="AudioStream" uid="uid://55eowexmw1py" path="res://audio/BlipSelect.wav" id="4_n78m2"]
+[ext_resource type="Script" path="res://ScoreboardButton.cs" id="4_ujw4x"]
+[ext_resource type="Script" path="res://ExitButton.cs" id="5_71obr"]
+[ext_resource type="Script" path="res://audioPlayers/FocusSound.cs" id="7_0yfkn"]
+[ext_resource type="AudioStream" uid="uid://cnui1u26501ut" path="res://audio/EnterSelection.wav" id="8_rxpg8"]
+[ext_resource type="Script" path="res://audioPlayers/SelectSound.cs" id="9_wtpjf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mv1pg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_laqn4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtbst"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_em00u")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(80, 72)
+texture = ExtResource("2_xvp8g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -26.5
+offset_top = -45.0
+offset_right = 26.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = -8
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+focus_neighbor_left = NodePath("../ExitButton")
+focus_neighbor_top = NodePath("../ExitButton")
+focus_neighbor_right = NodePath("../ScoreboardButton")
+focus_neighbor_bottom = NodePath("../ScoreboardButton")
+theme_override_colors/font_color = Color(0.666667, 0.811765, 0.054902, 1)
+theme_override_colors/font_pressed_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_colors/font_focus_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mv1pg")
+text = "Start"
+flat = true
+script = ExtResource("3_kdx4g")
+
+[node name="ScoreboardButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_left = NodePath("../StartButton")
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_right = NodePath("../ExitButton")
+focus_neighbor_bottom = NodePath("../ExitButton")
+theme_override_colors/font_color = Color(0.666667, 0.811765, 0.054902, 1)
+theme_override_colors/font_pressed_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_colors/font_focus_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/focus = SubResource("StyleBoxEmpty_laqn4")
+text = "Scoreboard"
+flat = true
+script = ExtResource("4_ujw4x")
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_left = NodePath("../ScoreboardButton")
+focus_neighbor_top = NodePath("../ScoreboardButton")
+focus_neighbor_right = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../StartButton")
+theme_override_colors/font_color = Color(0.666667, 0.811765, 0.054902, 1)
+theme_override_colors/font_pressed_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_colors/font_focus_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.423529, 0.588235, 0.160784, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rtbst")
+text = "Exit"
+flat = true
+script = ExtResource("5_71obr")
+
+[node name="FocusSound" type="AudioStreamPlayer2D" parent="VBoxContainer"]
+position = Vector2(18, 0)
+stream = ExtResource("4_n78m2")
+volume_db = -10.0
+script = ExtResource("7_0yfkn")
+
+[node name="SelectSound" type="AudioStreamPlayer2D" parent="VBoxContainer"]
+position = Vector2(18, 0)
+rotation = -0.00361187
+stream = ExtResource("8_rxpg8")
+volume_db = -10.0
+script = ExtResource("9_wtpjf")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 18.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.666667, 0.811765, 0.054902, 1)
+text = "Meteor Minimizer"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_OnStartPressed"]
+[connection signal="pressed" from="VBoxContainer/ScoreboardButton" to="." method="_OnScoreboardPressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_OnExitPressed"]
