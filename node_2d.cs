@@ -15,7 +15,7 @@ public partial class node_2d : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (_autoload.Score >= 1000)
+		if (_autoload.Score >= 10000)
 		{
 			foreach (var i in GetChildren(true))
 			{
